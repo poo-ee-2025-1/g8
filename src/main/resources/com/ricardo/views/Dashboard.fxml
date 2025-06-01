@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="main_hbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ricardo.DashboardController">
+   <children>
+      <VBox fx:id="vbox" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" />
+      <VBox fx:id="right_vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+   </children>
+</HBox>

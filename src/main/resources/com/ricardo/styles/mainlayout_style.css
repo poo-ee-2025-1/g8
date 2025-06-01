@@ -1,0 +1,49 @@
+.main-hbox {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-spacing: 0;
+}
+
+.sidebar-menu {
+    -fx-spacing: 15;
+    -fx-padding: 15 25 15 25;
+}
+
+.sidebar-menu-anchorpane {
+    -fx-background-color: #473F78;
+    -fx-background-radius: 25;
+    -fx-background-insets: 2;
+}
+
+
+.mainview {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+}
+
+.mainb-hbox {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-spacing: 15;
+}
+
+.mainb-label {
+    -fx-font-family: 'Inter';
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.mainb-icon {
+    -fx-icon-color: #9B94C7;
+    -fx-effect: dropshadow(gaussian, rgba(41, 31, 56, 0.56), 5, .4, 0, 2)
+}
+
+.title-text {
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.mbbutton-text {
+    -fx-font-weight: bold;
+}
