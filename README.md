@@ -15,15 +15,15 @@ Consiste em um projeto - com estrutura de App Planner - para controle e visualiz
 
 ### 📁 Estrutura do Projeto:
 ```
-├── docs/					→ Documentações técnicas do projeto
-	├── uml/
-	└── README.md
+├── docs/				→ Documentações técnicas do projeto
+│	├── uml/
+│	└── README.md
 ├── src/
 │	└── main/
-│		├── java/			→ Código-fonte
+│		├── java/		→ Código-fonte
 │		└── resources/		→ FXML, imagens, fontes e estilos
 ├──.gitignore
-├── pom.xml					→ Configuração Maven
+├── pom.xml				→ Configuração Maven
 ├── README.md
 ```
 
@@ -73,6 +73,7 @@ Consiste em um projeto - com estrutura de App Planner - para controle e visualiz
 - Escrevam código limpo, comentem quando necessário e mantenham as boas práticas para os commits e pull requests (qualquer dúvida, contatem o líder).
 - Para os documentos (ex: README, UMLs...) mantenham atualizados de acordo com as mudanças feitas. Registrem tudo que for necessário, de forma concisa, no momento da mudança, para não gerar desatualização no projeto.
 - Não altere a estrutura inicial do projeto, a menos que seja discutido e acordado entre os integrantes previamente, para evitar problemas futuros.
+- Leia o README de [docs/](.docs/) para ter as informações sobre a documentação técnica do projeto.
 
 ### 📄 Licença
 Este projeto é de uso acadêmico, desenvolvido para fins educacionais. Todos os direitos reservados ao Grupo 8.
