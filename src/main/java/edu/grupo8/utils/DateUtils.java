@@ -1,4 +1,4 @@
-package com.ricardo.utils;
+package edu.grupo8.utils;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
