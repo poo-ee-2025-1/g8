@@ -1,4 +1,4 @@
-package com.ricardo.components;
+package edu.grupo8.components;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

@@ -1,12 +1,11 @@
-package com.ricardo;
+package edu.grupo8;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import com.ricardo.components.CalendarComponent;
-import com.ricardo.components.StatisticComponent;
-
+import edu.grupo8.components.CalendarComponent;
+import edu.grupo8.components.StatisticComponent;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
