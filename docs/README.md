@@ -26,4 +26,29 @@ A pasta `docs/` consiste no espaço para registro conciso e organizado de toda a
         usuario-casodeuso.png
     ```
 
--
+
+- **Diagramas**
+
+  - **Diagramas de caso de uso**: 
+  
+     - **Usuário**: apresenta as ações que o **usuário** pode realizar no sistema **KeepFix**, com foco, no momento, na tela de **Dashboard**.
+        ```
+         Ações representadas:
+         - Visualizar estatísticas
+         - Alternar entre tipos de dados
+         - Navegar pelo calendário semanal
+        ```
+    
+  - **Diagrama de sequência**: mostra o fluxo de execução do sistema **KeepFix** desde que o **usuário** inicia a aplicação até a visualização da tela **Dashboard**.
+   ```
+   Etapas representadas:
+    - Início da aplicação pela classe `App`
+    - Carregamento do layout principal (`MainLayout`)
+    - Abertura da tela `Dashboard.fxml`
+    - Instanciação dos componentes:
+     - Estatísticas de Manutenções
+     - Estatísticas de Equipamentos
+     - Calendário Semanal
+    - Renderização da interface ao usuário
+    - Interação com abas e calendário
+   ```
