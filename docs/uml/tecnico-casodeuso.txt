@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+
+actor Técnico
+
+usecase "Visualizar Dashboard\ncom estatísticas" as UC1
+
+Técnico --> UC1
+
+note right of UC1
+Pré-condição: sistema iniciado e dashboard carregado
+
+Fluxo principal:
+1. Exibir tela de Dashboard
+2. Mostrar estatísticas de manutenções
+3. Mostrar estatísticas de equipamentos
+4. Alternar entre "Concluídos" e "Cancelados"
+
+Alternativa:
+4a. Se não houver dados, mostrar "Work In Progress"
+
+Pós-condição: dados exibidos com sucesso
+end note
+@enduml
