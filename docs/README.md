@@ -36,8 +36,7 @@ A pasta `docs/` consiste no espaço para registro conciso e organizado de toda a
      - Alternar entre tipos de dados
      - Navegar pelo calendário semanal
     ```
-Diagrama de Sequência — Resumo
-
+    
   - **Diagrama de sequência**: mostra o fluxo de execução do sistema **KeepFix** desde que o **usuário** inicia a aplicação até a visualização da tela **Dashboard**.
    ```
    Etapas representadas:
