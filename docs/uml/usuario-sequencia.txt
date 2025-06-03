@@ -1,0 +1,40 @@
+@startuml
+actor Usuário
+participant App
+participant MainLayoutController
+participant DashboardController
+participant StatisticComponent
+participant CalendarComponent
+participant UI
+
+Usuário -> App : inicia aplicação (main)
+App -> App : start(Stage)
+App -> App : loadFXML("MainLayout")
+App -> MainLayoutController : initialize()
+
+note right of App
+Cria cena inicial com estilo 
+e fonte personalizada
+end note
+
+App -> UI : exibe tela principal (MainLayout)
+
+Usuário -> UI : clica em "Dashboard"
+UI -> MainLayoutController : evento de clique no menu lateral
+MainLayoutController -> App : loadFXML("Dashboard")
+App -> DashboardController : initialize()
+
+DashboardController -> StatisticComponent : new("Manutenções", ...)
+DashboardController -> StatisticComponent : new("Equipamentos", ...)
+DashboardController -> CalendarComponent : new(LocalDate.now())
+
+DashboardController -> DashboardController : adiciona componentes ao layout
+DashboardController -> UI : renderiza estatísticas e calendário
+
+note right of UI
+Usuário vê gráficos e calendário 
+na tela de Dashboard
+end note
+
+Usuário -> UI : interage com abas e calendário
+@enduml
