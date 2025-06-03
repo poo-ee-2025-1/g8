@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor Usuário
+
+rectangle "KeepFix" {
+  usecase "Visualizar Dashboard com estatísticas"
+  usecase "Alternar entre tipos de estatísticas"
+  usecase "Navegar pelas semanas no calendário"
+  usecase "Retornar à semana atual"
+  usecase "Trocar de módulo via menu lateral"
+  usecase "Visualizar interface do calendário"
+}
+ 
+Usuário --> "Visualizar Dashboard com estatísticas"
+Usuário --> "Alternar entre tipos de estatísticas"
+Usuário --> "Navegar pelas semanas no calendário"
+Usuário --> "Retornar à semana atual"
+Usuário --> "Trocar de módulo via menu lateral"
+Usuário --> "Visualizar interface do calendário"
+@enduml
