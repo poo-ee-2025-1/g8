@@ -29,7 +29,9 @@ A pasta `docs/` consiste no espaço para registro conciso e organizado de toda a
 
 - **Diagramas**
 
-  - **Diagrama de caso de uso de usuário**: apresenta as ações que o **usuário** pode realizar no sistema **KeepFix**, com foco, no momento, na tela de **Dashboard**.
+  - **Diagramas de caso de uso**: 
+  
+   - **Usuário**: apresenta as ações que o **usuário** pode realizar no sistema **KeepFix**, com foco, no momento, na tela de **Dashboard**.
     ```
     Ações representadas:
      - Visualizar estatísticas
