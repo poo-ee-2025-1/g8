@@ -76,7 +76,7 @@ public class MainLayoutController implements Initializable{
     private void loadScreen(String fxml) {
         new Thread(() -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ricardo/views/" + fxml + ".fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/grupo8/views/" + fxml + ".fxml"));
                 Parent content = loader.load();
 
                 Platform.runLater(() -> {

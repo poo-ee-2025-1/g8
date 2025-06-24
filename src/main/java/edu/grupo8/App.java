@@ -18,10 +18,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Regular.ttf"), 12);
         scene = new Scene(loadFXML("MainLayout"), 720, 480);
-        scene.getStylesheets().add(getClass().getResource("/com/ricardo/styles/mainlayout_style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/edu/grupo8/styles/mainlayout_style.css").toExternalForm());
         stage.setScene(scene);
         stage.setMaximized(true);
-        stage.getIcons().add(new Image(getClass().getResource("/com/ricardo/icons/logo.png").toExternalForm()));
+        stage.getIcons().add(new Image(getClass().getResource("/edu/grupo8/icons/logo.png").toExternalForm()));
         stage.show();
     }
 
