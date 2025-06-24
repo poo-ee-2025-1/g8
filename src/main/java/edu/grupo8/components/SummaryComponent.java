@@ -1,9 +1,9 @@
-package com.grupo8.components;
+package edu.grupo8.components;
 
 import java.util.List;
 
-import com.grupo8.components.StatusComponent.Status;
-import com.grupo8.models.Manutencao;
+import edu.grupo8.components.StatusComponent.Status;
+import edu.grupo8.models.Manutencao;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -8,6 +8,9 @@ import java.util.ResourceBundle;
 
 import edu.grupo8.components.CalendarComponent;
 import edu.grupo8.components.StatisticComponent;
+import edu.grupo8.components.SummaryComponent;
+import edu.grupo8.models.Manutencao;
+import edu.grupo8.models.ManutencaoAgenda;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

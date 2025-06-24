@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import edu.grupo8.models.ManutencaoAgenda;
 import edu.grupo8.utils.DateUtils;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
