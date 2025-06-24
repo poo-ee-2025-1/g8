@@ -1,4 +1,4 @@
-package com.ricardo.models;
+package edu.grupo8.models;
 
 import java.time.LocalDate;
 

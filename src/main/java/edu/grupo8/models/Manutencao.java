@@ -1,4 +1,4 @@
-package com.ricardo.models;
+package edu.grupo8.models;
 
 public class Manutencao {
     private String status;

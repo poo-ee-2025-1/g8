@@ -1,4 +1,4 @@
-package com.ricardo;
+package edu.grupo8;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,8 +6,7 @@ import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.Icon;
 
-import com.ricardo.components.MenuHighlightShape;
-
+import edu.grupo8.components.MenuHighlightShape;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;

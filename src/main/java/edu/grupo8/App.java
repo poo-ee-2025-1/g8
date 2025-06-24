@@ -1,4 +1,4 @@
-package com.ricardo;
+package edu.grupo8;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

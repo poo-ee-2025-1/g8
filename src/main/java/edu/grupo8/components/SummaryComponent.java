@@ -1,9 +1,9 @@
-package com.ricardo.components;
+package edu.grupo8.components;
 
 import java.util.List;
 
-import com.ricardo.components.StatusComponent.Status;
-import com.ricardo.models.Manutencao;
+import edu.grupo8.components.StatusComponent.Status;
+import edu.grupo8.models.Manutencao;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -4,6 +4,6 @@ module com.ricardo {
     requires javafx.graphics;
     requires org.kordamp.ikonli.javafx;
 
-    opens com.ricardo to javafx.fxml;
-    exports com.ricardo;
+    opens edu.grupo8 to javafx.fxml;
+    exports edu.grupo8;
 }

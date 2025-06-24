@@ -1,4 +1,4 @@
-package com.ricardo.components;
+package edu.grupo8.components;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

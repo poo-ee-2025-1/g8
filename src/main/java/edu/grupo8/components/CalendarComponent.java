@@ -1,4 +1,4 @@
-package com.ricardo.components;
+package edu.grupo8.components;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,9 +6,8 @@ import java.util.List;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import com.ricardo.models.ManutencaoAgenda;
-import com.ricardo.utils.DateUtils;
-
+import edu.grupo8.models.ManutencaoAgenda;
+import edu.grupo8.utils.DateUtils;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

@@ -1,4 +1,4 @@
-package com.ricardo;
+package edu.grupo8;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.ricardo.components.CalendarComponent;
-import com.ricardo.components.StatisticComponent;
-import com.ricardo.components.SummaryComponent;
-import com.ricardo.models.Manutencao;
-import com.ricardo.models.ManutencaoAgenda;
-
+import edu.grupo8.components.CalendarComponent;
+import edu.grupo8.components.StatisticComponent;
+import edu.grupo8.components.SummaryComponent;
+import edu.grupo8.models.Manutencao;
+import edu.grupo8.models.ManutencaoAgenda;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
