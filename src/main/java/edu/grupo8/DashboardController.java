@@ -44,8 +44,8 @@ public class DashboardController implements Initializable{
 
     CalendarComponent calendarComponent = new CalendarComponent(LocalDate.now(), manutencoes);
 
-    Manutencao teste = new Manutencao("pendente");
-    SummaryComponent summaryComponent = new SummaryComponent(List.of(teste));
+    //Manutencao teste = new Manutencao("pendente");
+    //SummaryComponent summaryComponent = new SummaryComponent(List.of(teste));
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -63,6 +63,8 @@ public class DashboardController implements Initializable{
         HBox.setHgrow(right_vbox, Priority.ALWAYS);
         right_vbox.setAlignment(Pos.TOP_CENTER);
         right_vbox.setSpacing(50);
-        right_vbox.getChildren().addAll(calendarComponent, summaryComponent);
+        
+        right_vbox.getChildren().addAll(calendarComponent);
+        //right_vbox.getChildren().addAll(calendarComponent, summaryComponent);
     }
 }
