@@ -1,0 +1,19 @@
+@startuml Equipamento
+package edu.grupo8.models {
+
+    class Equipamento {
+        - int id
+        - String nome
+        - String descricao
+        - Manutencao manutencao
+        + Equipamento()
+        + Equipamento(String, String)
+        + String getNome()
+        + void setNome(String)
+        + String getDescricao()
+        + void setDescricao(String)
+        + Manutencao getManutencao()
+        + void setManutencao(Manutencao)
+    }
+}
+@enduml
