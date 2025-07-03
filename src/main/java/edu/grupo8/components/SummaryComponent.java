@@ -2,7 +2,7 @@ package edu.grupo8.components;
 
 import java.util.List;
 
-import edu.grupo8.components.StatusComponent.Status;
+import edu.grupo8.models.Manutencao.Status;
 import edu.grupo8.models.Manutencao;
 
 import javafx.geometry.Insets;
