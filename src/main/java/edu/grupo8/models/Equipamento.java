@@ -1,9 +1,22 @@
 package edu.grupo8.models;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "Equipamento")
 public class Equipamento {
+
+    @DatabaseField(generatedId = true)
     private int id;
+
+    @DatabaseField(dataType = DataType.STRING)
     private String nome;
+
+    @DatabaseField(dataType = DataType.STRING)
     private String descricao;
+
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Manutencao manutencao;
 
     public Equipamento() {}
@@ -36,4 +49,6 @@ public class Equipamento {
     public void setManutencao(Manutencao manutencao) {
         this.manutencao = manutencao;
     }
+
+    public int getId() { return id; }
 }
