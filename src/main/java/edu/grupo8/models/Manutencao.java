@@ -3,18 +3,31 @@ package edu.grupo8.models;
 import java.time.LocalDate;
 
 import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "Manutencao")
 public class Manutencao {
+
     public enum Status {
             CONCLUIDO, PENDENTE, ATRASADO, CANCELADO;
         }
-    
-    private Status status;
-    private String nome;
+
+    @DatabaseField(generatedId = true)
     private int id;
+
+    @DatabaseField()
+    private Status status;
+
+    @DatabaseField(dataType = DataType.STRING)
+    private String nome;
+
+    @DatabaseField(dataType = DataType.DATE)
     private String data;
 
     // Atributo para fazer a relação 1:N via chave estrangeira pelo ORMLite
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
     private ForeignCollection<Equipamento> equipamentos;
 
     public Manutencao() {}
