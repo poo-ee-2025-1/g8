@@ -1,18 +1,12 @@
 package edu.grupo8.components;
 
+import edu.grupo8.models.Manutencao;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class StatusComponent {
-    public enum Status {
-        CONCLUIDO,
-        PENDENTE,
-        ATRASADO,
-        CANCELADO;
-    }
-
-    public static HBox get(Status status, double width, double height) {
+    public static HBox get(Manutencao.Status status, double width, double height) {
         HBox container =  new HBox();
         Label title = new Label();
         String titleText;
@@ -50,10 +44,12 @@ public class StatusComponent {
         );
 
         title.setText(titleText);
+        title.setPrefSize(width, height);
         title.setStyle(
             "-fx-font-weight: bold;"+
             "-fx-text-fill: #ffffff"
         );
+        title.setAlignment(Pos.CENTER);
 
         container.getChildren().add(title);
 
