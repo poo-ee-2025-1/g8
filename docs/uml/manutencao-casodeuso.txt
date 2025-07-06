@@ -1,0 +1,20 @@
+@startuml UseCaseManutencoes
+actor "Usuário" as Usuario
+
+rectangle "Módulo de Manutenções" {
+  usecase "Registrar Manutenção"   as UC_RegistrarManut
+  usecase "Editar Manutenção"      as UC_EditarManut
+  usecase "Cancelar Manutenção"    as UC_CancelarManut
+  usecase "Listar Manutenções"     as UC_ListarManut
+  usecase "Visualizar Dashboard"   as UC_Dashboard
+  usecase "Associar Equipamentos"  as UC_AssociarEquips
+}
+
+Usuario --> UC_ListarManut
+Usuario --> UC_RegistrarManut
+Usuario --> UC_EditarManut
+Usuario --> UC_CancelarManut
+Usuario --> UC_Dashboard
+UC_RegistrarManut .> UC_AssociarEquips
+UC_EditarManut    .> UC_AssociarEquips
+@enduml

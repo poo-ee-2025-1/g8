@@ -36,7 +36,7 @@
 
 .mainb-icon {
     -fx-icon-color: #9B94C7;
-    -fx-effect: dropshadow(gaussian, rgba(41, 31, 56, 0.56), 5, .4, 0, 2)
+    -fx-effect: dropshadow(gaussian, rgba(41, 31, 56, 0.56), 5, .4, 0, 2);
 }
 
 .title-text {
@@ -46,4 +46,67 @@
 
 .mbbutton-text {
     -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-padding: -1;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent rgba(0, 0, 0, 0.808) transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.check-box {
+}
+
+.check-box .box{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #473f78;
+}
+
+.check-box:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #473F78;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #ffffff;
+}
+
+.itemline {
+    -fx-background-color: #F4F5F6;
+    -fx-background-radius: 30;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.itemline-edit-button {
+    -fx-fill: #473F78;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, .4, 0, 2);
+}
+
+.itemline-accept-button {
+    -fx-fill: #2C6E49;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, .4, 0, 2);
+}
+
+.itemline-cancel-button {
+    -fx-fill: #B80C09;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, .4, 0, 2);
+}
+
+.itemline-hover:hover {
+    -fx-opacity: .8;
+}
+
+.itemline-desc-popup {
+    -fx-background-color: #f4f5f6;
+    -fx-background-radius: 15;
+}
+
+.soft-drop-shadow {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, .4, 0, 2);
 }

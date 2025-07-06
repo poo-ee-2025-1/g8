@@ -1,0 +1,29 @@
+@startuml Manutencao
+package edu.grupo8.models {
+
+    enum Status {
+        CONCLUIDO
+        PENDENTE
+        ATRASADO
+        CANCELADO
+    }
+
+    class Manutencao {
+        - int id
+        - String nome
+        - Status status
+        - String data
+        - ForeignCollection<Equipamento> equipamentos
+        + Manutencao()
+        + Manutencao(String, Status, LocalDate)
+        + Status getStatus()
+        + void setStatus(Status)
+        + LocalDate getData()
+        + void setData(LocalDate)
+        + int getId()
+        + String getNome()
+        + void setNome(String)
+        + ForeignCollection<Equipamento> getEquipamentos()
+    }
+}
+@enduml

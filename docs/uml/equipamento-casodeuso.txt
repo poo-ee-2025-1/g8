@@ -1,0 +1,17 @@
+@startuml UseCaseEquipamentos
+actor "Usuário" as Usuario
+
+rectangle "Módulo de Equipamentos" {
+  usecase "Cadastrar Equipamento" as UC_CadastrarEquip
+  usecase "Editar Equipamento"   as UC_EditarEquip
+  usecase "Excluir Equipamento"  as UC_ExcluirEquip
+  usecase "Listar Equipamentos"  as UC_ListarEquip
+  usecase "Visualizar Detalhes\n do Equipamento" as UC_DetalhesEquip
+}
+
+Usuario --> UC_ListarEquip
+Usuario --> UC_CadastrarEquip
+Usuario --> UC_EditarEquip
+Usuario --> UC_ExcluirEquip
+Usuario --> UC_DetalhesEquip
+@enduml
