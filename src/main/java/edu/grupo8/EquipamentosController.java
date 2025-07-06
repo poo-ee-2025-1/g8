@@ -54,6 +54,7 @@ public class EquipamentosController implements Initializable{
                 } else {
                     StackPane wrapper = new StackPane(item);
                     wrapper.setAlignment(Pos.CENTER);
+                    wrapper.setPrefHeight(80);
                     wrapper.setStyle("-fx-padding: 5;");
                     setGraphic(wrapper);
                 }

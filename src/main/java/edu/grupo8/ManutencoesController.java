@@ -20,11 +20,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
 public class ManutencoesController implements Initializable{
@@ -60,6 +57,7 @@ public class ManutencoesController implements Initializable{
                 } else {
                     StackPane wrapper = new StackPane(item);
                     wrapper.setAlignment(Pos.CENTER);
+                    wrapper.setPrefHeight(80);
                     wrapper.setStyle("-fx-padding: 5;");
                     setGraphic(wrapper);
                 }
