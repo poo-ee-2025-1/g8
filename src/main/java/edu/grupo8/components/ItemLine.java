@@ -1,7 +1,6 @@
 package edu.grupo8.components;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Stack;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -22,7 +21,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 
@@ -44,6 +42,8 @@ public class ItemLine extends HBox {
     private Status status2_s;
     private StackPane botaoEditar = createBotaoEditar();
     private Label descricaoLb = new Label();
+    private TextField descricaoTf = new TextField();
+    private HBox descricaoContainer = new HBox();
 
     private Manutencao manutencao;
     private Equipamento equipamento;
@@ -70,6 +70,8 @@ public class ItemLine extends HBox {
 
     private void setConfig() {
         setMaxSize(800, 45);
+        setPrefHeight(45);
+        setMinHeight(45);
         getStyleClass().add("itemline");
     }
 
@@ -106,10 +108,10 @@ public class ItemLine extends HBox {
     }
 
     private void renderItemLineEquipamento(String itemName, String desc) {
-        HBox descricaoContainer = new HBox();
         Label descTitle = new Label("Descrição");
 
         descTitle.getStyleClass().add("title-text");
+        descTitle.setPrefWidth(335);
 
         descricaoContainer.setSpacing(10);
         descricaoContainer.setAlignment(Pos.CENTER);
@@ -123,13 +125,13 @@ public class ItemLine extends HBox {
 
         descricaoLb.setText(desc);
         descricaoLb.getStyleClass().add("title-text");
-        descricaoLb.setPrefWidth(180);
 
         StackPane botaoMore = createMoreButton(descricaoLb);
 
+        descricaoContainer.getChildren().clear();
         descricaoContainer.getChildren().addAll(botaoMore, descTitle);
 
-        getChildren().addAll(cb, lbitemName, descricaoContainer);
+        getChildren().addAll(cb, lbitemName, descricaoContainer, botaoEditar);
     }
 
     private StackPane createMoreButton(Label content) {
@@ -193,42 +195,61 @@ public class ItemLine extends HBox {
 
         botao.setOnMouseClicked(e -> {
             if(!editMode) {
-                System.out.println("edit mode");
-                Label label1 = new Label("/");
-                Label label2 = new Label("/");
+                if(manutencao != null) {
+                    Label label1 = new Label("/");
+                    Label label2 = new Label("/");
 
-                label1.getStyleClass().add("title-text");
-                label2.getStyleClass().add("title-text");
+                    label1.getStyleClass().add("title-text");
+                    label2.getStyleClass().add("title-text");
 
-                dayTf.getStyleClass().add("title-text");
-                dayTf.setPrefWidth(24);
-                dayTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("dd")));
+                    dayTf.getStyleClass().add("title-text");
+                    dayTf.setPrefWidth(24);
+                    dayTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("dd")));
 
-                monthTf.getStyleClass().add("title-text");
-                monthTf.setPrefWidth(24);
-                monthTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("MM")));
+                    monthTf.getStyleClass().add("title-text");
+                    monthTf.setPrefWidth(24);
+                    monthTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("MM")));
 
-                yearTf.getStyleClass().add("title-text");
-                yearTf.setPrefWidth(48);
-                yearTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("yyyy")));
+                    yearTf.getStyleClass().add("title-text");
+                    yearTf.setPrefWidth(48);
+                    yearTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("yyyy")));
+                    
+                    dataContainer.setPrefWidth(100);
+                    dataContainer.setMaxWidth(100);
+                    dataContainer.setAlignment(Pos.CENTER);
+                    dataContainer.getChildren().clear();
+                    dataContainer.getChildren().addAll(dayTf, label1, monthTf, label2, yearTf);
+
+                    tfItemName.setPrefWidth(300);
+                    tfItemName.getStyleClass().addAll("title-text");
+                    tfItemName.setPromptText(manutencao.getNome());
+
+                    statusContainer.setOpacity(.5);
+                    statusContainer.getStyleClass().remove("itemline-hover");
+
+                    editMode = true;
+
+                    getChildren().clear();
+                    getChildren().addAll(cb, tfItemName, container, statusContainer, dataContainer, botaoEditar);
+                }
                 
-                dataContainer.setPrefWidth(100);
-                dataContainer.setMaxWidth(100);
-                dataContainer.setAlignment(Pos.CENTER);
-                dataContainer.getChildren().clear();
-                dataContainer.getChildren().addAll(dayTf, label1, monthTf, label2, yearTf);
+                if(equipamento != null) {
+                    tfItemName.setPrefWidth(300);
+                    tfItemName.getStyleClass().addAll("title-text");
+                    tfItemName.setPromptText(equipamento.getNome());
 
-                tfItemName.setPrefWidth(300);
-                tfItemName.getStyleClass().addAll("title-text");
-                tfItemName.setPromptText(manutencao.getNome());
+                    descricaoTf.setPrefWidth(335);
+                    descricaoTf.getStyleClass().add("title-text");
+                    descricaoTf.setText(equipamento.getDescricao());
 
-                statusContainer.setOpacity(.5);
-                statusContainer.getStyleClass().remove("itemline-hover");
+                    descricaoContainer.getChildren().remove(1);
+                    descricaoContainer.getChildren().add(descricaoTf);
 
-                editMode = true;
+                    editMode = true;
 
-                getChildren().clear();
-                getChildren().addAll(cb, tfItemName, container, statusContainer, dataContainer, botaoEditar);
+                    getChildren().clear();
+                    getChildren().addAll(cb, tfItemName, descricaoContainer, botaoEditar);
+                }
 
                 // Popup
                 popupContent.setSpacing(50);
@@ -241,15 +262,15 @@ public class ItemLine extends HBox {
                 popupContent.getChildren().addAll(botaoAceitar, botaoCancelar);
 
                 botao.setOnMouseEntered(ev -> {
-                    if(!popup.isShowing() && editMode) {
-                        double x = botao.localToScreen(botao.getBoundsInLocal()).getMinX();
-                        double y = botao.localToScreen(botao.getBoundsInLocal()).getMinY() - 38;
+                        if(!popup.isShowing() && editMode) {
+                            double x = botao.localToScreen(botao.getBoundsInLocal()).getMinX();
+                            double y = botao.localToScreen(botao.getBoundsInLocal()).getMinY() - 38;
 
-                        popup.getContent().clear();
-                        popup.getContent().setAll(popupContent);
-                        popup.show(botao, x, y);
-                    }
-                });
+                            popup.getContent().clear();
+                            popup.getContent().setAll(popupContent);
+                            popup.show(botao, x, y);
+                        }
+                    });
 
                 botao.setOnMouseExited(ev -> {
                     if(popup.isShowing() && editMode) {
@@ -314,7 +335,14 @@ public class ItemLine extends HBox {
                 statusContainer.getStyleClass().add("itemline-hover");
 
                 getChildren().clear();
-                getChildren().addAll(cb, lbitemName, container, statusContainer, lbDate, botaoEditar);
+
+                if(manutencao != null) {
+                    getChildren().addAll(cb, lbitemName, container, statusContainer, lbDate, botaoEditar);
+                }
+
+                if(equipamento != null) {
+                    renderItemLineEquipamento(this.equipamento.getNome(), this.equipamento.getDescricao());
+                }
             }
         });
 

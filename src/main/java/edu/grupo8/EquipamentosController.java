@@ -2,32 +2,26 @@ package edu.grupo8;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import edu.grupo8.components.CreateBotao;
 import edu.grupo8.components.CreateEquipamentoWindow;
-import edu.grupo8.components.CreateManutencaoWindow;
 import edu.grupo8.components.ItemLine;
 import edu.grupo8.models.Equipamento;
-import edu.grupo8.models.Manutencao;
-import edu.grupo8.models.Manutencao.Status;
-import edu.grupo8.utils.ManutencaoDAO;
+import edu.grupo8.utils.EquipamentoDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
-public class ManutencoesController implements Initializable{
+public class EquipamentosController implements Initializable{
     @FXML
     StackPane listStackPane;
 
@@ -37,10 +31,10 @@ public class ManutencoesController implements Initializable{
     StackPane createBotao = new CreateBotao("mdi2p-plus", "#FDCA40");
     StackPane updateBotao = new CreateBotao("mdi2r-refresh", "#9B94C7");
     Popup popup = new Popup();
-    HBox popupContent = new CreateManutencaoWindow(popup);
+    VBox popupContent = new CreateEquipamentoWindow(popup);
     ListView<HBox> lista = new ListView<HBox>();
 
-    private List<Manutencao> manutencoes;
+    private List<Equipamento> equipamentos;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -91,15 +85,15 @@ public class ManutencoesController implements Initializable{
         HBox itemline = new HBox();
 
         try{
-            ManutencaoDAO dao = new ManutencaoDAO();
-            manutencoes = dao.readAll();
+            EquipamentoDAO dao = new EquipamentoDAO();
+            equipamentos = dao.readAll();
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
 
         lista.getItems().clear();
-        for(Manutencao man : manutencoes) {
-            itemline = new ItemLine(man);
+        for(Equipamento eq : equipamentos) {
+            itemline = new ItemLine(eq);
             lista.getItems().add(itemline);
         }
     }

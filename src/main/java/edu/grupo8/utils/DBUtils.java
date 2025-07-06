@@ -6,7 +6,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 
 public class DBUtils {
-    private static final String DATABASE_URL = "jdbc:sqlite:meubanco.db";
+    private static final String DATABASE_URL = "jdbc:sqlite:keepfix.db";
     private static ConnectionSource connectionSource;
 
     public static synchronized ConnectionSource getConnectionSource() throws SQLException {
@@ -20,7 +20,7 @@ public class DBUtils {
         if (connectionSource != null) {
             try {
                 connectionSource.close();
-            } catch (Exception e) {  // <-- corrigido aqui
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
