@@ -75,7 +75,7 @@ public class CalendarComponent extends VBox {
         renderCalendarComponent();
     }
 
-    private VBox displayDayVBox(String dayT, String dayN, String dayY) {
+    private VBox displayDayVBox(String dayT, String dayN, String dayY, int month) {
         VBox display = new VBox();
         Pane spacer = new Pane();
         Text dayTitle = new Text();
@@ -160,7 +160,7 @@ public class CalendarComponent extends VBox {
 
         for(ManutencaoAgenda manutencao : manutencoes) {
             LocalDate data = manutencao.getData();
-            if(data.getDayOfMonth() == Integer.parseInt(dayN) && data.getYear() == Integer.parseInt(dayY)) {
+            if(data.getDayOfMonth() == Integer.parseInt(dayN) && data.getYear() == Integer.parseInt(dayY) && data.getMonthValue() == month) {
                 if(!display.getChildren().contains(mark)) {
                     display.getChildren().add(mark);
                 }
@@ -309,7 +309,7 @@ public class CalendarComponent extends VBox {
         String titleMonth = "";
         
         for(int i = 0; i < 7; i++) {
-            VBox display = displayDayVBox(dayTitles[i], ""+week[i].getDayOfMonth(), ""+week[i].getYear());
+            VBox display = displayDayVBox(dayTitles[i], ""+week[i].getDayOfMonth(), ""+week[i].getYear(), week[i].getMonthValue());
             
             displays.add(display);
 
@@ -467,5 +467,9 @@ public class CalendarComponent extends VBox {
             tt.setInterpolator(Interpolator.EASE_BOTH);
             tt.play();
         }
+    }
+
+    public void setManutencoes(List<ManutencaoAgenda> manutencoes) {
+        this.manutencoes = manutencoes;
     }
 }

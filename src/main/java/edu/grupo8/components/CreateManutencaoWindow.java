@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+import edu.grupo8.ManutencoesController;
 import edu.grupo8.models.Equipamento;
 import edu.grupo8.models.Manutencao;
 import edu.grupo8.models.Manutencao.Status;
@@ -49,6 +50,8 @@ public class CreateManutencaoWindow extends HBox{
     private HBox statusSelected;
     private String mensagem = "";
     private List<Equipamento> equipamentoList;
+
+    private ManutencoesController controller;
 
     public CreateManutencaoWindow(Popup popup) {
         this.popup = popup;
@@ -206,7 +209,8 @@ public class CreateManutencaoWindow extends HBox{
                         eq.setManutencao(manutencao);
                         eqDao.update(eq);
                     }
-                    
+                    controller.updateLista();
+
                     popup.hide();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -315,5 +319,9 @@ public class CreateManutencaoWindow extends HBox{
             return false;
         }
         return true;
+    }
+
+    public void setController(ManutencoesController controller) {
+        this.controller = controller;
     }
 }

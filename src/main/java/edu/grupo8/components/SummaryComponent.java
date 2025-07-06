@@ -58,19 +58,19 @@ public class SummaryComponent extends VBox{
 
         if(!manutencoes.isEmpty()) {
             for(Manutencao manutencao : manutencoes) {
-                if(manutencao.getStatus().equals("concluido")) {
+                if(manutencao.getStatus().equals(Status.CONCLUIDO)) {
                     concluidoCount += 1;
                 }
 
-                if(manutencao.getStatus().equals("pendente")) {
+                if(manutencao.getStatus().equals(Status.PENDENTE)) {
                     pendenteCount += 1;
                 }
 
-                if(manutencao.getStatus().equals("atrasado")) {
+                if(manutencao.getStatus().equals(Status.ATRASADO)) {
                     atrasadoCount += 1;
                 }
 
-                if(manutencao.getStatus().equals("cancelado")) {
+                if(manutencao.getStatus().equals(Status.CANCELADO)) {
                     canceladoCount += 1;
                 }
             }

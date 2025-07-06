@@ -166,4 +166,8 @@ public class MainLayoutController implements Initializable{
         rt.setInterpolator(Interpolator.EASE_OUT);
         rt.play();
     }
+
+    public void onLogoImageClicked() {
+        loadScreen("Splash");
+    }
 }

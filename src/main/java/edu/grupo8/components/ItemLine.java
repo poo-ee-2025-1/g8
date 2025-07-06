@@ -1,12 +1,18 @@
 package edu.grupo8.components;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import edu.grupo8.ManutencoesController;
 import edu.grupo8.models.Equipamento;
 import edu.grupo8.models.Manutencao;
 import edu.grupo8.models.Manutencao.Status;
+import edu.grupo8.utils.EquipamentoDAO;
+import edu.grupo8.utils.ManutencaoDAO;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.PauseTransition;
@@ -47,6 +53,7 @@ public class ItemLine extends HBox {
 
     private Manutencao manutencao;
     private Equipamento equipamento;
+    private ManutencoesController controller;
 
     private double statusContainerWidth = 70;
     private double statusContainerHeight = 25;
@@ -77,7 +84,22 @@ public class ItemLine extends HBox {
 
     private void renderItemLineManutencao(String itemName, String date) {
         Label title = new Label("Equipamentos");
-        StackPane botao = createMoreButton(new Label("teste; teste; teste; teste; teste;"));
+        Label equipamentos = new Label();
+
+        try {
+            ManutencaoDAO dao = new ManutencaoDAO();
+            List<Equipamento> equips = dao.listarEquipamentos(manutencao);
+            String desc = "";
+            for(Equipamento eq : equips) {
+                desc += eq.getNome()+"; ";
+            }
+            equipamentos.setText(desc);
+        }
+        catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        StackPane botao = createMoreButton(equipamentos);
 
         container.setAlignment(Pos.CENTER);
         container.setSpacing(5);
@@ -204,15 +226,15 @@ public class ItemLine extends HBox {
 
                     dayTf.getStyleClass().add("title-text");
                     dayTf.setPrefWidth(24);
-                    dayTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("dd")));
+                    dayTf.setText(manutencao.getData().format(DateTimeFormatter.ofPattern("dd")));
 
                     monthTf.getStyleClass().add("title-text");
                     monthTf.setPrefWidth(24);
-                    monthTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("MM")));
+                    monthTf.setText(manutencao.getData().format(DateTimeFormatter.ofPattern("MM")));
 
                     yearTf.getStyleClass().add("title-text");
                     yearTf.setPrefWidth(48);
-                    yearTf.setPromptText(manutencao.getData().format(DateTimeFormatter.ofPattern("yyyy")));
+                    yearTf.setText(manutencao.getData().format(DateTimeFormatter.ofPattern("yyyy")));
                     
                     dataContainer.setPrefWidth(100);
                     dataContainer.setMaxWidth(100);
@@ -222,7 +244,7 @@ public class ItemLine extends HBox {
 
                     tfItemName.setPrefWidth(300);
                     tfItemName.getStyleClass().addAll("title-text");
-                    tfItemName.setPromptText(manutencao.getNome());
+                    tfItemName.setText(manutencao.getNome());
 
                     statusContainer.setOpacity(.5);
                     statusContainer.getStyleClass().remove("itemline-hover");
@@ -236,7 +258,7 @@ public class ItemLine extends HBox {
                 if(equipamento != null) {
                     tfItemName.setPrefWidth(300);
                     tfItemName.getStyleClass().addAll("title-text");
-                    tfItemName.setPromptText(equipamento.getNome());
+                    tfItemName.setText(equipamento.getNome());
 
                     descricaoTf.setPrefWidth(335);
                     descricaoTf.getStyleClass().add("title-text");
@@ -312,6 +334,55 @@ public class ItemLine extends HBox {
         botao.getStyleClass().addAll("itemline-hover");
         botao.getChildren().addAll(circle, icon);
 
+        botao.setOnMouseClicked(e -> {
+            if(editMode) {
+                editMode = false;
+
+                if(manutencao != null){
+                    lbitemName.setText(tfItemName.getText());
+                    lbDate.setText(dayTf.getText()+"/"+monthTf.getText()+"/"+yearTf.getText());
+
+                    LocalDate data = LocalDate.of(Integer.parseInt(yearTf.getText()), Integer.parseInt(monthTf.getText()), Integer.parseInt(dayTf.getText()));
+
+                    manutencao.setNome(tfItemName.getText());
+                    manutencao.setData(data);
+
+                    try {
+                        ManutencaoDAO dao = new ManutencaoDAO();
+                        dao.update(manutencao);
+                    }
+                    catch(SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    statusContainer.setOpacity(1);
+                    statusContainer.getStyleClass().add("itemline-hover");
+
+                    getChildren().clear();
+                    getChildren().addAll(cb, lbitemName, container, statusContainer, lbDate, botaoEditar);
+                }
+
+                if(equipamento != null) {
+                    lbitemName.setText(tfItemName.getText());
+                    descricaoLb.setText(descricaoTf.getText());
+
+                    equipamento.setNome(tfItemName.getText());
+                    equipamento.setDescricao(descricaoTf.getText());
+
+                    try {
+                        EquipamentoDAO eqDao = new EquipamentoDAO();
+                        eqDao.update(equipamento);
+                    }
+                    catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    getChildren().clear();
+                    renderItemLineEquipamento(this.equipamento.getNome(), this.equipamento.getDescricao());
+                }
+            }
+        });
+
         return botao;
     }
 
@@ -372,7 +443,7 @@ public class ItemLine extends HBox {
         }
         else if(manutencao.getStatus() == Status.PENDENTE || manutencao.getStatus() == Status.ATRASADO) {
             status1 = StatusComponent.get(Status.CONCLUIDO, statusContainerWidth, statusContainerHeight);
-            status2_s = Status.CONCLUIDO;
+            status1_s = Status.CONCLUIDO;
             status2 = StatusComponent.get(Status.CANCELADO, statusContainerWidth, statusContainerHeight);
             status2_s = Status.CANCELADO;
         }
@@ -389,12 +460,32 @@ public class ItemLine extends HBox {
             this.manutencao.setStatus(status1_s);
             statusContainer.getChildren().set(0, status1);
             statusPopup.hide();
+
+            try{
+                ManutencaoDAO dao = new ManutencaoDAO();
+                dao.update(this.manutencao);
+
+                controller.updateLista();
+            }
+            catch(SQLException ex) {
+                ex.printStackTrace();
+            }
         });
 
         status2.setOnMouseClicked(e -> {
             this.manutencao.setStatus(status2_s);
             statusContainer.getChildren().set(0, status2);
             statusPopup.hide();
+
+            try{
+                ManutencaoDAO dao = new ManutencaoDAO();
+                dao.update(this.manutencao);
+
+                controller.updateLista();
+            }
+            catch(SQLException ex) {
+                ex.printStackTrace();
+            }
         });
 
         statusPopup.setAutoHide(true);
@@ -427,5 +518,21 @@ public class ItemLine extends HBox {
 
             statusPopup.show(statusContainer, x, y);
         }
+    }
+
+    public boolean isSelected() {
+        return cb.isSelected();
+    }
+
+    public Manutencao getManutencao() {
+        return this.manutencao;
+    }
+
+    public Equipamento getEquipamento() {
+        return this.equipamento;
+    }
+
+    public void setControllerManutencao(ManutencoesController controller) {
+        this.controller = controller;
     }
 }

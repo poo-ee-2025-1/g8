@@ -28,7 +28,7 @@ public class Manutencao {
     private String data;
 
     // Atributo para fazer a relação 1:N via chave estrangeira pelo ORMLite
-    @ForeignCollectionField(eager = true) // ← esta é a anotação correta
+    @ForeignCollectionField(eager = true)
     private ForeignCollection<Equipamento> equipamentos;
 
     public Manutencao() {}
@@ -65,5 +65,9 @@ public class Manutencao {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ForeignCollection<Equipamento> getEquipamentos() {
+        return equipamentos;
     }
 }

@@ -18,7 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
 public class EquipamentosController implements Initializable{
@@ -30,9 +29,10 @@ public class EquipamentosController implements Initializable{
 
     StackPane createBotao = new CreateBotao("mdi2p-plus", "#FDCA40");
     StackPane updateBotao = new CreateBotao("mdi2r-refresh", "#9B94C7");
+    CreateBotao deleteBotao = new CreateBotao("mdi2d-delete", "#B80C09");
     Popup popup = new Popup();
-    VBox popupContent = new CreateEquipamentoWindow(popup);
-    ListView<HBox> lista = new ListView<HBox>();
+    CreateEquipamentoWindow popupContent = new CreateEquipamentoWindow(popup);
+    ListView<ItemLine> lista = new ListView<ItemLine>();
 
     private List<Equipamento> equipamentos;
 
@@ -40,13 +40,15 @@ public class EquipamentosController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         updateLista();
 
+        popupContent.setControlller(this);
+
         lista.getStyleClass().add("lista-crud");
         listStackPane.getChildren().add(lista);
         lista.setSelectionModel(null);
 
-        lista.setCellFactory(lv -> new ListCell<HBox>() {
+        lista.setCellFactory(lv -> new ListCell<ItemLine>() {
             @Override
-            protected void updateItem(HBox item, boolean empty) {
+            protected void updateItem(ItemLine item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
@@ -63,7 +65,7 @@ public class EquipamentosController implements Initializable{
 
         createBotao.setOnMouseClicked(e -> {
             if(!popup.isShowing()) {
-                double x = listStackPane.localToScreen(listStackPane.getBoundsInLocal()).getMinX() + 260;
+                double x = listStackPane.localToScreen(listStackPane.getBoundsInLocal()).getMinX() + 340;
                 double y = listStackPane.localToScreen(listStackPane.getBoundsInLocal()).getMinY() - 80;
 
                 popup.getContent().clear();
@@ -76,14 +78,29 @@ public class EquipamentosController implements Initializable{
             updateLista();
         });
 
-        mainHbox.setSpacing(10);
+        deleteBotao.setOnMouseClicked(e -> {
+            for(ItemLine item : lista.getItems()) {
+                if(item.isSelected()) {
+                    try{
+                        EquipamentoDAO dao = new EquipamentoDAO();
+                        dao.delete(item.getEquipamento());
+                    } catch(SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            updateLista();
+        });
+
+        mainHbox.setSpacing(40);
         mainHbox.setPadding(new Insets(5));
+        mainHbox.setAlignment(Pos.CENTER);
         
-        mainHbox.getChildren().addAll(createBotao, updateBotao);
+        mainHbox.getChildren().addAll(createBotao, updateBotao, deleteBotao);
     }
 
-    private void updateLista() {
-        HBox itemline = new HBox();
+    public void updateLista() {
+        ItemLine itemline;
 
         try{
             EquipamentoDAO dao = new EquipamentoDAO();
@@ -92,10 +109,12 @@ public class EquipamentosController implements Initializable{
             ex.printStackTrace();
         }
 
-        lista.getItems().clear();
-        for(Equipamento eq : equipamentos) {
-            itemline = new ItemLine(eq);
-            lista.getItems().add(itemline);
+        if(!lista.equals(null)) {
+            lista.getItems().clear();
+            for(Equipamento eq : equipamentos) {
+                itemline = new ItemLine(eq);
+                lista.getItems().add(itemline);
+            }
         }
     }
 }

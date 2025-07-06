@@ -7,6 +7,7 @@ import edu.grupo8.models.Manutencao;
 import edu.grupo8.models.Equipamento;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManutencaoDAO {
@@ -43,5 +44,9 @@ public class ManutencaoDAO {
                 .where()
                 .eq("equipamento_id", equipamento.getId())
                 .query();
+    }
+
+    public List<Equipamento> listarEquipamentos(Manutencao manutencao) throws SQLException {
+        return new ArrayList<>(manutencao.getEquipamentos());
     }
 }

@@ -2,6 +2,7 @@ package edu.grupo8.components;
 
 import java.sql.SQLException;
 
+import edu.grupo8.EquipamentosController;
 import edu.grupo8.models.Equipamento;
 import edu.grupo8.utils.EquipamentoDAO;
 import javafx.geometry.Insets;
@@ -23,6 +24,8 @@ public class CreateEquipamentoWindow extends VBox{
     private Label mensagemLabel = new Label();
 
     private Popup popup = new Popup();
+
+    private EquipamentosController controller;
 
     public CreateEquipamentoWindow(Popup popup) {
         this.popup = popup;
@@ -101,6 +104,8 @@ public class CreateEquipamentoWindow extends VBox{
                 try {
                     EquipamentoDAO dao = new EquipamentoDAO();
                     dao.create(equipamento);
+
+                    controller.updateLista();
                     popup.hide();
                     
                 } catch (SQLException ex) {
@@ -129,5 +134,9 @@ public class CreateEquipamentoWindow extends VBox{
             return false;
         }
         return true;
+    }
+
+    public void setControlller(EquipamentosController controller) {
+        this.controller = controller;
     }
 }

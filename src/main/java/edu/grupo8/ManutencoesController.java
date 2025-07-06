@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import edu.grupo8.components.CreateBotao;
-import edu.grupo8.components.CreateEquipamentoWindow;
 import edu.grupo8.components.CreateManutencaoWindow;
 import edu.grupo8.components.ItemLine;
-import edu.grupo8.models.Equipamento;
 import edu.grupo8.models.Manutencao;
 import edu.grupo8.models.Manutencao.Status;
 import edu.grupo8.utils.ManutencaoDAO;
@@ -31,11 +29,13 @@ public class ManutencoesController implements Initializable{
     @FXML
     HBox mainHbox;
 
-    StackPane createBotao = new CreateBotao("mdi2p-plus", "#FDCA40");
-    StackPane updateBotao = new CreateBotao("mdi2r-refresh", "#9B94C7");
-    Popup popup = new Popup();
-    HBox popupContent = new CreateManutencaoWindow(popup);
-    ListView<HBox> lista = new ListView<HBox>();
+    private CreateBotao createBotao = new CreateBotao("mdi2p-plus", "#FDCA40");
+    private CreateBotao updateBotao = new CreateBotao("mdi2r-refresh", "#9B94C7");
+    private CreateBotao deleteBotao = new CreateBotao("mdi2d-delete", "#B80C09");
+    private Popup popup = new Popup();
+    private CreateManutencaoWindow popupContent = new CreateManutencaoWindow(popup);
+    private ListView<ItemLine> lista = new ListView<ItemLine>();
+    private ItemLine itemline;
 
     private List<Manutencao> manutencoes;
 
@@ -43,13 +43,15 @@ public class ManutencoesController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         updateLista();
 
+        popupContent.setController(this);
+
         lista.getStyleClass().add("lista-crud");
         listStackPane.getChildren().add(lista);
         lista.setSelectionModel(null);
 
-        lista.setCellFactory(lv -> new ListCell<HBox>() {
+        lista.setCellFactory(lv -> new ListCell<ItemLine>() {
             @Override
-            protected void updateItem(HBox item, boolean empty) {
+            protected void updateItem(ItemLine item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
@@ -79,15 +81,28 @@ public class ManutencoesController implements Initializable{
             updateLista();
         });
 
-        mainHbox.setSpacing(10);
+        deleteBotao.setOnMouseClicked(e -> {
+            for(ItemLine item : lista.getItems()) {
+                if(item.isSelected()) {
+                    try{
+                        ManutencaoDAO dao = new ManutencaoDAO();
+                        dao.delete(item.getManutencao());
+                    } catch(SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            updateLista();
+        });
+
+        mainHbox.setSpacing(40);
         mainHbox.setPadding(new Insets(5));
+        mainHbox.setAlignment(Pos.CENTER);
         
-        mainHbox.getChildren().addAll(createBotao, updateBotao);
+        mainHbox.getChildren().addAll(createBotao, updateBotao, deleteBotao);
     }
 
-    private void updateLista() {
-        HBox itemline = new HBox();
-
+    public void updateLista() {
         try{
             ManutencaoDAO dao = new ManutencaoDAO();
             manutencoes = dao.readAll();
@@ -95,10 +110,23 @@ public class ManutencoesController implements Initializable{
             ex.printStackTrace();
         }
 
-        lista.getItems().clear();
-        for(Manutencao man : manutencoes) {
-            itemline = new ItemLine(man);
-            lista.getItems().add(itemline);
+        if(!lista.equals(null)) {
+            lista.getItems().clear();
+            for(Manutencao man : manutencoes) {
+                if(man.getStatus() == Status.PENDENTE && man.getData().isBefore(LocalDate.now())) {
+                    man.setStatus(Status.ATRASADO);
+                    try {
+                        ManutencaoDAO dao = new ManutencaoDAO();
+                        dao.update(man);
+                    } catch(SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                itemline = new ItemLine(man);
+                itemline.setControllerManutencao(this);
+                lista.getItems().add(itemline);
+            }
         }
     }
 }

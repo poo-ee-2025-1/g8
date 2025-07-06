@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <HBox prefHeight="400.0" prefWidth="640.0" styleClass="main-hbox" stylesheets="@styles/mainlayout_style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.grupo8.MainLayoutController">
@@ -18,7 +17,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="120.0" prefWidth="130.0" styleClass="mainlogo-hbox">
                      <children>
-                        <ImageView fx:id="logo_image" fitHeight="130.0" fitWidth="90.0" onMouseEntered="#onLogoImageMouseEnter" onMouseExited="#onLogoImageMouseExit" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="logo_image" fitHeight="130.0" fitWidth="90.0" onMouseClicked="#onLogoImageClicked" onMouseEntered="#onLogoImageMouseEnter" onMouseExited="#onLogoImageMouseExit" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/logo.png" />
                            </image>
@@ -56,11 +55,11 @@
       </AnchorPane>
       <StackPane fx:id="mainStackPane" prefHeight="380.0" prefWidth="530.0" styleClass="mainview" stylesheets="@styles/mainlayout_style.css" HBox.hgrow="ALWAYS">
          <children>
-            <Label prefHeight="232.0" prefWidth="342.0" text="Work in Progress">
-               <font>
-                  <Font name="Corbel" size="45.0" />
-               </font>
-            </Label>
+            <ImageView fx:id="logo_image1" fitHeight="294.0" fitWidth="338.0" onMouseEntered="#onLogoImageMouseEnter" onMouseExited="#onLogoImageMouseExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/logo.png" />
+               </image>
+            </ImageView>
          </children></StackPane>
    </children>
 </HBox>
