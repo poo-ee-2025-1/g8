@@ -41,7 +41,14 @@
 
 .title-text {
     -fx-font-weight: bold;
+    -fx-text-fill: #000000;
     -fx-font-size: 18;
+}
+
+.sub-text {
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14;
 }
 
 .mbbutton-text {
@@ -109,4 +116,32 @@
 
 .soft-drop-shadow {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, .4, 0, 2);
+}
+
+.criar-manutencao {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+}
+
+.create-window-botao {
+    -fx-background-radius: 15;
+}
+
+.create-botao {
+    -fx-background-radius: 90;
+}
+
+.lista-crud {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.list-cell-crud {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
 }
